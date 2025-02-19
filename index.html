@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IT Department Inventory</title>
+    <style>
+        /* General Styles */
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f6f9;
+            color: #333;
+        }
+
+        .container {
+            width: 85%;
+            margin: auto;
+            padding: 30px;
+        }
+
+        header {
+            text-align: center;
+            padding: 40px;
+            background-color: #1e1e1e;
+            color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        header h1 {
+            font-size: 3em;
+            margin: 0;
+            font-weight: 600;
+        }
+
+        header p {
+            font-size: 1.2em;
+            margin-top: 10px;
+        }
+
+        .search-section {
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        #searchInput {
+            width: 50%;
+            padding: 12px;
+            font-size: 16px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            outline: none;
+            background-color: #fff;
+            transition: background-color 0.3s ease;
+        }
+
+        #searchInput:focus {
+            background-color: #e7f7ff;
+            border-color: #2a88f3;
+        }
+
+        .inventory-section {
+            margin-top: 50px;
+        }
+
+        h2 {
+            font-size: 2.2em;
+            color: #333;
+            margin-bottom: 20px;
+            text-align: center;
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        th, td {
+            padding: 15px;
+            text-align: left;
+            font-size: 16px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #2a88f3;
+            color: #fff;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+
+        footer {
+            background-color: #1e1e1e;
+            color: #fff;
+            text-align: center;
+            padding: 20px 0;
+            margin-top: 50px;
+        }
+
+        footer p {
+            font-size: 1.2em;
+            margin: 0;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+
+        body {
+            animation: fadeIn 1s ease-out;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                width: 90%;
+            }
+
+            #searchInput {
+                width: 90%;
+            }
+        }
+		
+		a {
+    text-decoration: none;
+    color: inherit;  /* This makes sure the text color is inherited from the parent element */
+}
+
+a:hover {
+    text-decoration: none;  /* Ensures no underline on hover */
+    color: inherit;  /* Ensures no color change on hover */
+}
+
+
+    </style>
+</head>
+<body>
+
+    <!-- Header Section -->
+    <header>
+        <div class="container">
+            <h1>IT Department Inventory</h1>
+            <p>Track and manage all your IT devices and software</p>
+        </div>
+    </header>
+
+    <!-- Search Section -->
+    <section class="search-section">
+        <div class="container">
+            <input type="text" id="searchInput" placeholder="Search inventory..." onkeyup="searchInventory()">
+        </div>
+    </section>
+
+    <!-- Inventory Section -->
+    <section class="inventory-section">
+        <div class="container">
+            <h2>Available Devices</h2>
+            <table id="devicesTable">
+                <thead>
+                    <tr>
+                        <th onclick="sortTable(0, 'devicesTable')">Item Name</th>
+                        <th onclick="sortTable(1, 'devicesTable')">Serial Number / IMEI / MAC Address</th>
+                        <th onclick="sortTable(2, 'devicesTable')">Received Date</th>
+                        <th onclick="sortTable(3, 'devicesTable')">Current Status</th>
+                        <th onclick="sortTable(4, 'devicesTable')">Assigned To</th>
+                        <th onclick="sortTable(5, 'devicesTable')">Remarks / Additional Info</th>
+                    </tr>
+                </thead>
+				
+                <tbody>
+                    <tr>
+                        <td><a href="JioFi Internet Router with USB Cable.html?item=1">JioFi Internet Router with USB Cable</a></td>
+                        <td>(IMEI) 355888881155393</td>
+                        <td>2/2/2025</td>
+                        <td>Available</td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td><a href="USB Type-C Cable.html?item=2">USB Type-C Cable</a></td>
+                        <td>-</td>
+                        <td>2/2/2025</td>
+                        <td>Available</td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td><a href="D-Link.html?item=3">D-Link DES-1008A model 8-ports 10/100 Fast Ethernet Switch</a></td>
+                        <td>(Serial Number) QS0U1D3012412</td>
+                        <td>2/2/2025</td>
+                        <td>Available</td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+					
+					<tr>
+                        <td><a href="Wired USB OPTICAL MOUSE.html?item=4">Wired USB OPTICAL MOUSE</a></td>
+                        <td>Device Manufacturer: YSPRINGTECH</td>
+                        <td>2/2/2025</td>
+                        <td>Available</td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+					<tr>
+                        <td><a href="ADSL Splitter.html?item=5">ADSL Splitter</a></td>
+                        <td>-</td>
+                        <td>2/2/2025</td>
+                        <td>Available</td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+					<tr>
+                        <td><a href="Power Cable.html?item=6">Power Cables</a></td>
+                        <td>-</td>
+                        <td>2/2/2025</td>
+                        <td>Available</td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+					
+					<tr>
+                        <td><a href="USB Extension Cable1.html?item=6">USB Extension Cable 1</a></td>
+                        <td>-</td>
+                        <td>2/2/2025</td>
+                        <td>Available</td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+					
+					
+					<tr>
+                        <td><a href="USB Extension Cable2.html?item=6">USB Extension Cable 2</a></td>
+                        <td>-</td>
+                        <td>2/2/2025</td>
+                        <td>Available</td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+					
+					<tr>
+                        <td><a href="Syrotech SY-GPON-1000R ONU (Optical Network Unit).html?item=7">Syrotech SY-GPON-1000R ONU (Optical Network Unit)</a></td>
+                        <td>(MAC) 7CA96B83DAE0</td>
+                        <td>2/2/2025</td>
+                        <td>Available</td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+					
+					<tr>
+                        <td><a href="Airtel Digital TV HD Set-top Box.html?item=7">Airtel Digital TV HD Set-top Box</a></td>
+                        <td>(SIC Card ID) 00080303296</td>
+                        <td>2/2/2025</td>
+                        <td>Available</td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+					
+					<tr>
+                        <td><a href="Device iBall Baton Brand 8-Port 10100M Green Desktop Switch.html?item=7">Device iBall Baton Brand 8-Port 10/100M Green Desktop Switch</a></td>
+                        <td>(S/No)301861B31648</td>
+                        <td>2/2/2025</td>
+                        <td>Available</td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+					
+					<tr>
+                        <td><a href="D-Link CAT6 networking cables UTP.html?item=7">D-Link CAT6 networking cables UTP</a></td>
+                        <td></td>
+                        <td>2/2/2025</td>
+                        <td>Available</td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+					
+					<tr>
+                        <td><a href="crimping tool.html?item=7">crimping tool</a></td>
+                        <td></td>
+                        <td>2/2/2025</td>
+                        <td>Available</td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+					
+					<tr>
+                        <td><a href="D-Link's DES-1024D Model 24-Port 10100Mbps Ethernet Network Switch.html?item=7">D-Link's DES-1024D Model 24-Port 10/100Mbps Ethernet Network Switch</a></td>
+                        <td></td>
+                        <td>2/2/2025</td>
+                        <td>Available</td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+					
+					<tr>
+                        <td><a href="HDMI cable 1.html?item=7">HDMI cable 1</a></td>
+                        <td></td>
+                        <td>2/2/2025</td>
+                        <td>Available</td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+					
+					<tr>
+                        <td><a href="HDMI cable 2.html?item=7">HDMI cable 2</a></td>
+                        <td></td>
+                        <td>2/2/2025</td>
+                        <td>Available</td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+					
+					<tr>
+                        <td><a href="HDMI cable 3.html?item=7">HDMI cable 3</a></td>
+                        <td></td>
+                        <td>2/2/2025</td>
+                        <td>Available</td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+					
+					<tr>
+                        <td><a href="D-Link 16-Port 10100 Desktop Switch (DES-1016A).html?item=7">D-Link 16-Port 10/100 Desktop Switch (DES-1016A)</a></td>
+                        <td></td>
+                        <td>2/2/2025</td>
+                        <td>Available</td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+					
+					<tr>
+                        <td><a href="USB Wired Keyboard Artis Brand.html?item=7">USB Wired Keyboard Artis Brand</a></td>
+                        <td></td>
+                        <td>2/2/2025</td>
+                        <td>Available</td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+					
+					<tr>
+                        <td><a href="USB Wired Keyboard Dell Brand.html?item=7">USB Wired Keyboard Dell Brand</a></td>
+                        <td></td>
+                        <td>2/2/2025</td>
+                        <td>Available</td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+					
+					<tr>
+                        <td><a href="CAT 6 UTP LAN cable.html?item=7">CAT 6 UTP LAN cable</a></td>
+                        <td></td>
+                        <td>2/2/2025</td>
+                        <td>Available</td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+					
+					<tr>
+                        <td><a href="Category 6 UTP LAN Cable.html?item=7">Category 6 UTP LAN Cable</a></td>
+                        <td></td>
+                        <td>2/2/2025</td>
+                        <td>Available</td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+					
+					<tr>
+                        <td><a href="HDMI to VGA Converter (Adapter).html?item=7">HDMI to VGA Converter (Adapter)</a></td>
+                        <td></td>
+                        <td>2/2/2025</td>
+                        <td>Available</td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+					
+					<tr>
+                        <td><a href="Old Lan Cables.html?item=7">Old Lan Cables</a></td>
+                        <td></td>
+                        <td>2/2/2025</td>
+                        <td>Available</td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+					
+					<tr>
+                        <td><a href="CAT-6 UTP LAN cable.html?item=7">CAT-6 UTP LAN cable</a></td>
+                        <td></td>
+                        <td>2/2/2025</td>
+                        <td>Available</td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h2>Software Licenses</h2>
+            <table id="softwareTable">
+                <thead>
+                    <tr>
+                        <th onclick="sortTable(0, 'softwareTable')">Software</th>
+                        <th onclick="sortTable(1, 'softwareTable')">Version</th>
+                        <th onclick="sortTable(2, 'softwareTable')">Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    
+                    <tr>
+                        <td><a href="Microsoft Office Home & Business 2016.html?item=7">Microsoft Office Home & Business 2016</a></td>
+                        <td>Standard</td>
+                        <td>Licensed</td>
+                    </tr>
+                    
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <!-- Footer Section -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Shubham Thite | All Rights Reserved</p>
+        </div>
+    </footer>
+
+    <script>
+        // Sort Table Functionality
+        function sortTable(n, tableId) {
+            let table = document.getElementById(tableId);
+            let rows = Array.from(table.rows).slice(1); // Exclude the header row
+            let ascending = table.rows[0].cells[n].dataset.order !== "asc";
+            rows.sort((rowA, rowB) => {
+                let cellA = rowA.cells[n].innerText;
+                let cellB = rowB.cells[n].innerText;
+                return ascending ? cellA.localeCompare(cellB) : cellB.localeCompare(cellA);
+            });
+            rows.forEach(row => table.appendChild(row)); // Append sorted rows
+            table.rows[0].cells[n].dataset.order = ascending ? "asc" : "desc"; // Toggle the order for next click
+        }
+
+        // Search Functionality
+        function searchInventory() {
+            const input = document.getElementById('searchInput').value.toLowerCase();
+            const deviceTable = document.getElementById('devicesTable');
+            const softwareTable = document.getElementById('softwareTable');
+
+            filterTable(deviceTable, input);
+            filterTable(softwareTable, input);
+        }
+
+        function filterTable(table, searchText) {
+            const rows = table.getElementsByTagName('tr');
+            
+            for (let i = 1; i < rows.length; i++) {
+                const row = rows[i];
+                let textContent = row.textContent || row.innerText;
+                if (textContent.toLowerCase().indexOf(searchText) > -1) {
+                    row.style.display = '';
+                } else {
+                    row.style.display = 'none';
+                }
+            }
+        }
+    </script>
+
+</body>
+</html>
